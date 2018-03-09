@@ -10,7 +10,6 @@ LazyData: true
 Imports: ggplot2,
     grid,
     dplyr,
-    tidyr,
     readr,
     leaflet,
     stringr
