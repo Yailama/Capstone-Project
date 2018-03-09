@@ -1,10 +1,10 @@
 Package: capstone.project
-Title: What the Package Does (one line, title case)
+Title: Easy preparation and plot of NOAA hurricane data
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Amalia", "Akopyan", email = "adakopyan@gmail.com", role = c("aut", "cre"))
+Description: This package contains functions needed to clean raw data and prepare to plot, as well several fuctions to plot hurricane information in different styles.
 Depends: R (>= 3.4.1)
-License: What license is it under?
+License: GPL
 Encoding: UTF-8
 LazyData: true
 Imports: ggplot2,
@@ -17,3 +17,4 @@ Suggests: knitr,
     rmarkdown,
     testthat
 VignetteBuilder: knitr
+RoxygenNote: 6.0.1

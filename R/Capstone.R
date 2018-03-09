@@ -1,7 +1,9 @@
 #' @import dplyr
 #' @import readr
 #' @import stringr
-
+#' @import ggplot2
+#' @import grid
+#' @import leaflet
 
 #############################################################Module 1##############################################################################
 ##Load data to R
@@ -12,11 +14,10 @@
 
 #database<-readr::read_delim(file.choose(), delim="\t")
 
-
-#' This function is used in order to change name of Location in database to more convinient format: it keeps only Country name in Titlecase
+#' @description  This function is used in order to change name of Location in database to more convinient format: it keeps only Country name in Titlecase
 #' @param location column of dataframe or simply a vector with names of locations to be changed
 #' @return the vector of Country names in title case is returned
-#' @examples eq_location_clean(location=database$COUNTRY)
+#' @examples eq_location_clean<-(location=database$COUNTRY)
 #' @export
     eq_location_clean<-function(location){cleaned_location<-paste0(stringr::str_to_title(location), ":")
                                           cleaned_location}
@@ -27,13 +28,13 @@
 #' thus, the only arument is the name of \code{data.frame} in which base is stored
 #' @param data a data frame that contains the imported base
 #' @return cleaned dataframe is returned with country names in title case and coordinates as numeric insread of character
-#' @example cleaned_base<-eq_clean_data(database)
+#' @examples eq_clean_data(database)->cleaned_base
 #' @export
 eq_clean_data<-function(data){
   data$DATE<-as.POSIXct(strptime("1994-02-03", format="%Y-%m-%d"))
   data$DATE[data$YEAR<0]<-as.POSIXct(strptime(paste(data$YEAR[data$YEAR<0], data$MONTH[data$YEAR<0],data$DAY[data$YEAR<0],sep="-"),"-%Y-%m-%d"))
   data$DATE[data$YEAR>=0]<-as.POSIXct(strptime(paste(data$YEAR[data$YEAR>=0], data$MONTH[data$YEAR>=0],data$DAY[data$YEAR>=0],sep="-"),"%Y-%m-%d"))
-  
+
   data$LONGITUDE<-as.numeric(gsub(" ", "", data$LONGITUDE))
   data$LATITUDE<-as.numeric(gsub(" ", "", data$LATITUDE))
   data$LOCATION_NAME<-eq_location_clean(data$COUNTRY)
@@ -55,7 +56,7 @@ draw_key_timline<-function(data, params, size){
   elem2<-circleGrob(x=0.6, y=0.5, r=data$size/10, gp=gpar(col=data$colour, fill=alpha(data$fill, data$alpha)))
   result <- gTree(children = gList(elem2))
   result
-  
+
 }
 
 
@@ -65,6 +66,7 @@ draw_key_timline<-function(data, params, size){
 #' create new geom_timeline, which shows magnitude and year of hurricane occured
 
 #' @inheritParams ggplot2::ggproto
+#' @examples this function needed to geom_timeline works. Is not called by user directly
 #' @export
 GeomTimeline <- ggplot2::ggproto("GeomTimeline", Geom,
                                   required_aes = c("x"),
@@ -83,6 +85,7 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", Geom,
                                   )
 #Geom to draw timeline
 #' @inheritParams ggplot2::geom_point
+#'@examples look at ggplot2 package geom_* usage examples to see possibilities of usage
 #' @export
 geom_timeline<- function(mapping = NULL, data = NULL, stat = "identity",
                            position = "identity", na.rm = FALSE,
@@ -107,12 +110,15 @@ geom_timeline<- function(mapping = NULL, data = NULL, stat = "identity",
 
 
 #' Here is slight modification of existing classic theme: everything is the same except default position of the legend: it is at the bottom, instead of right side
+#' @inheritParams ggplot2::theme_classic
+#' @export
 theme_timeline<-theme_classic() %+replace% theme(legend.position="bottom")
 
 #' It is modification of previous \code{geom_timeline} that can add captions to hurricanes plotted by date occured. Captions can be applyed to all observation,
 #' or to first n observations, having maximum value of specified metric (for example, first 5 with the highest magnitude level)
 #'
 #' @inheritParams ggplot2::ggproto
+#' @examples This function is needed to make geom_timeline_label works. Is not called by user directly
 #' @export
 GeomTimeline_label <- ggplot2::ggproto("GeomTimeline_label", Geom,
                                  required_aes = c("x"),
@@ -144,6 +150,7 @@ GeomTimeline_label <- ggplot2::ggproto("GeomTimeline_label", Geom,
 
 #Geom to draw timeline label
 #' @inheritParams ggplot2::geom_point
+#' @examples look at ggplot2 package geom_* usage example to see possibilities of usage
 #' @export
 geom_timeline_label<- function(mapping = NULL, data = NULL, stat = "identity",
                          position = "identity", na.rm = FALSE,
@@ -173,10 +180,11 @@ geom_timeline_label<- function(mapping = NULL, data = NULL, stat = "identity",
 #'@param location location
 #'@param magnitude intensity
 #'@param death numbet of deaths occured
+#'@examples cleaned_base$popup_text<-eq_create_label(cleaned_base, "LOCATION", "EQ_MAG_ML", "DEATHS")
 #'@export
 eq_create_label<-function(data, location, magnitude, death){
   data<-as.data.frame(data)
-  
+
   xxx<-function(x, argument){
     if(is.na(x)){x=""} else {x=paste0("<b>",argument, "</b> ",x, "<br>")}
     x
@@ -190,13 +198,12 @@ eq_create_label<-function(data, location, magnitude, death){
 
   Whole_popup}
 
-#eq_create_label(test_df, "Country", "Intensity", "Deaths")
-
 #' Function to plot dots of hurricanes on ineractive maps with popus containing basic information
 #' @param data data used
 #' @param longitude x-coord
 #' @param latitude y-cood
 #' @param annot_col column to extract popup caption from
+#' @examples eq_map(cleaned_base, "LONGITUDE", "LATITUDE", "popup_text")
 #' @export
 eq_map<-function(data, longitude, latitude, annot_col){
     keep<-c(longitude, latitude, annot_col)
