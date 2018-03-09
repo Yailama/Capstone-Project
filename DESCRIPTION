@@ -12,7 +12,8 @@ Imports: ggplot2,
     dplyr,
     tidyr,
     readr,
-    leaflet
+    leaflet,
+    stringr
 Suggests: knitr,
     rmarkdown,
     testthat
