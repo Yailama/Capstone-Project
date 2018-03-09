@@ -37,7 +37,7 @@ Use `geom_timeline` to get plot of hurricanes occured. For example, data from 20
 which will result in: 
 
 
-![geom_timeline output](geom_timeline output1.png)
+![geom_timeline output](geom_timeline_output1.png)
 
 It is also possible to arrange hurricane dots on y axis, for example, by country:
 
@@ -46,7 +46,7 @@ It is also possible to arrange hurricane dots on y axis, for example, by country
   
 which looks as follows:
 
-![geom_timeline output](geom_timeline output2.png)
+![geom_timeline output](geom_timeline_output2.png)
 
 
 The other option to mark countries is to put tick captions, using `geom_timeline_label`:
@@ -58,7 +58,7 @@ The other option to mark countries is to put tick captions, using `geom_timeline
 here `n_max` stays on how much top n (by size) hurricane dots should have captions (New Zeeland and Chile in our case):
 
 
-![geom_timeline_label output](geom_timeline_label output.png)
+![geom_timeline_label output](geom_timeline_label_output.png)
 
 
 Finally, to make interactive plot using HtmlWidget, you can use `eq_map` function. It allows to point the hurricane dots on the map, making popup-text. Because this is specific package, designed for the final assigment and fitted to the particular dataset, function `eq_create_label` takes base as data.frame object, as well as column names for longitude, latiitude and death numbers to character vector of popup-text for the map. If you need to pull text, containig other information, it could be stored as additional column to data.frame and used in the same way:
@@ -71,5 +71,5 @@ filter the data and adds column `popup_text` containig described information
   
 `eq_map(cleaned_base_copy, longitude="LONGITUDE", latitude="LATITUDE", annot_col = "popup_text")`
 
-![Screenshot of interactive plot](eq_map output.png)
+![Screenshot of interactive plot](eq_map_output.png)
 
