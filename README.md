@@ -1,5 +1,8 @@
 # capstone.project
 
+[![Build Status](https://travis-ci.org/Yailama/Capstone-project.svg?branch=master)](https://travis-ci.org/Yailama/Capstone-project)
+
+
 The goal of capstone.project is to provide user with several function that helps to prepatre NOAA raw hurricanes data to plot, as well as plot them in different styles
 
 ## Installation

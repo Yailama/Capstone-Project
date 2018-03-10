@@ -1,3 +1,4 @@
+#' Source code for the project
 #' @import dplyr
 #' @import readr
 #' @import stringr
@@ -5,23 +6,22 @@
 #' @import grid
 #' @import leaflet
 
-#############################################################Module 1##############################################################################
-##Load data to R
 
-#library(readr)
-#library(stringr)
-
-
-#database<-readr::read_delim(file.choose(), delim="\t")
-
+#'
+#' @name eq_location_clean
+#' @title clean location in raw data
 #' @description  This function is used in order to change name of Location in database to more convinient format: it keeps only Country name in Titlecase
 #' @param location column of dataframe or simply a vector with names of locations to be changed
 #' @return the vector of Country names in title case is returned
-#' @examples eq_location_clean<-(location=database$COUNTRY)
+#' @examples \dontrun{eq_location_clean<-(location=database$COUNTRY)}
 #' @export
-    eq_location_clean<-function(location){cleaned_location<-paste0(stringr::str_to_title(location), ":")
+eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to_title(location), ":")
                                           cleaned_location}
+#'
 
+#'
+#' @name eq_clean_data
+#' @title clean entire dataset
 #' @description  This function "cleans" the initial dataset so it can be further used in geoms: creates date column in POSTIXct format with given Year, Month and Day,
 #' as well as convert LONGITUDE and LATITUDE to numeric and clean location name using previous function [func(eq_location_clean)]. Because the cleaning task is
 #' quite specific to the current database, there is no option to choose columns, related to dates and coordinates. Instead, all of them are nested in the body of function
@@ -47,7 +47,9 @@
 
 ##############################Module2 Part one#################################
 
-
+#'
+#' @name draw_key_timeline
+#' @title function to identify legend
 #' @description This is function that is used in ggproto to make custom legend type in new geom_*.
 #'  @inheritParams ggplot2::draw_key_polygon
 #' @export
@@ -61,7 +63,9 @@
 
 
 
-
+#'
+#' @name GeomTimeline
+#' @title function to build ggproto for geom
 #' @description Here will be the usage of two functions, required to create custom geom: ggplot2:ggproto and geom_* (in this case geom_hurricane) in order to
 #' create new geom_timeline, which shows magnitude and year of hurricane occured
 #' @inheritParams ggplot2::ggproto
@@ -82,6 +86,10 @@
                                                    gp = grid::gpar(col = coords$colour, fill = coords$fill, alpha=coords$alpha))
                                   }
                                   )
+
+#'
+#' @name geom_timeline
+#' @title custom geom to plot data
 #' @description Geom to draw timeline
 #' @inheritParams ggplot2::geom_point
 #'@examples look at ggplot2 package geom_* usage examples to see possibilities of usage
@@ -107,12 +115,18 @@
 ##############################Module2 Part two#################################
 
 
-
+#'
+#' @name theme_timeline
+#' @title modification of existing geom classic theme
 #' @description Here is slight modification of existing classic theme: everything is the same except default position of the legend: it is at the bottom, instead of right side
 #' @inheritParams ggplot2::theme_classic
 #' @export
     theme_timeline<-theme_classic() %+replace% theme(legend.position="bottom")
 
+
+#'
+#' @name GeomTimeline_label
+#' @title ggproto for custom geom
 #' @description It is modification of previous \code{geom_timeline} that can add captions to hurricanes plotted by date occured. Captions can be applyed to all observation,
 #' or to first n observations, having maximum value of specified metric (for example, first 5 with the highest magnitude level)
 #' @inheritParams ggplot2::ggproto
@@ -146,6 +160,10 @@
                                  }
 )
 
+
+#'
+#' @name geom_timeline_label
+#' @title custom geom with labels
 #' @description Geom to draw timeline label
 #' @inheritParams ggplot2::geom_point
 #' @examples look at ggplot2 package geom_* usage example to see possibilities of usage
@@ -172,7 +190,9 @@
 
 #############################################Module 3#######################
 
-
+#'
+#' @name eq_create_label
+#' @title Function to generate leaflet popup text
 #' @description Function to automate creating popup labels in leaflet using html tags
 #'@param data data used
 #'@param location location
@@ -196,6 +216,9 @@
 
   Whole_popup}
 
+#'
+#' @name eq_map
+#' @title create interactive plots based on leaflet
 #' @description Function to plot dots of hurricanes on ineractive maps with popus containing basic information
 #' @param data data used
 #' @param longitude x-coord
@@ -203,7 +226,7 @@
 #' @param annot_col column to extract popup caption from
 #' @examples eq_map(cleaned_base, "LONGITUDE", "LATITUDE", "popup_text")
 #' @export
-    eq_map<-function(data, longitude, latitude, annot_col){
+eq_map<-function(data, longitude, latitude, annot_col){
     keep<-c(longitude, latitude, annot_col)
     data<-data[,colnames(data) %in% keep]
     data<-as.data.frame(na.omit(data))
