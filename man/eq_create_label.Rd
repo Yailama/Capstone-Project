@@ -19,5 +19,5 @@ eq_create_label(data, location, magnitude, death)
 Function to automate creating popup labels in leaflet using html tags
 }
 \examples{
-cleaned_base$popup_text<-eq_create_label(cleaned_base, "LOCATION", "EQ_MAG_ML", "DEATHS")
+\dontrun{cleaned_base$popup_text<-eq_create_label(cleaned_base, "LOCATION", "EQ_MAG_ML", "DEATHS")}
 }

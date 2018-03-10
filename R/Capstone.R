@@ -28,7 +28,7 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' thus, the only arument is the name of \code{data.frame} in which base is stored
 #' @param data a data frame that contains the imported base
 #' @return cleaned dataframe is returned with country names in title case and coordinates as numeric insread of character
-#' @examples eq_clean_data(database)->cleaned_base
+#' @examples \dontrun{eq_clean_data(database)->cleaned_base}
 #' @export
       eq_clean_data<-function(data){
   data$DATE<-as.POSIXct(strptime("1994-02-03", format="%Y-%m-%d"))
@@ -69,7 +69,7 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @description Here will be the usage of two functions, required to create custom geom: ggplot2:ggproto and geom_* (in this case geom_hurricane) in order to
 #' create new geom_timeline, which shows magnitude and year of hurricane occured
 #' @inheritParams ggplot2::ggproto
-#' @examples this function needed to geom_timeline works. Is not called by user directly
+#' @examples \dontrun{this function needed to geom_timeline works. Is not called by user directly}
 #' @export
     GeomTimeline <- ggplot2::ggproto("GeomTimeline", Geom,
                                   required_aes = c("x"),
@@ -92,7 +92,7 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @title custom geom to plot data
 #' @description Geom to draw timeline
 #' @inheritParams ggplot2::geom_point
-#'@examples look at ggplot2 package geom_* usage examples to see possibilities of usage
+#'@examples \dontrun{look at ggplot2 package geom_* usage examples to see possibilities of usage}
 #' @export
     geom_timeline<- function(mapping = NULL, data = NULL, stat = "identity",
                            position = "identity", na.rm = FALSE,
@@ -130,7 +130,7 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @description It is modification of previous \code{geom_timeline} that can add captions to hurricanes plotted by date occured. Captions can be applyed to all observation,
 #' or to first n observations, having maximum value of specified metric (for example, first 5 with the highest magnitude level)
 #' @inheritParams ggplot2::ggproto
-#' @examples This function is needed to make geom_timeline_label works. Is not called by user directly
+#' @examples \dontrun{This function is needed to make geom_timeline_label works. Is not called by user directly}
 #' @export
     GeomTimeline_label <- ggplot2::ggproto("GeomTimeline_label", Geom,
                                  required_aes = c("x"),
@@ -166,7 +166,7 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @title custom geom with labels
 #' @description Geom to draw timeline label
 #' @inheritParams ggplot2::geom_point
-#' @examples look at ggplot2 package geom_* usage example to see possibilities of usage
+#' @examples \dontrun{look at ggplot2 package geom_* usage example to see possibilities of usage}
 #' @export
     geom_timeline_label<- function(mapping = NULL, data = NULL, stat = "identity",
                          position = "identity", na.rm = FALSE,
@@ -198,7 +198,7 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #'@param location location
 #'@param magnitude intensity
 #'@param death numbet of deaths occured
-#'@examples cleaned_base$popup_text<-eq_create_label(cleaned_base, "LOCATION", "EQ_MAG_ML", "DEATHS")
+#'@examples \dontrun{cleaned_base$popup_text<-eq_create_label(cleaned_base, "LOCATION", "EQ_MAG_ML", "DEATHS")}
 #'@export
     eq_create_label<-function(data, location, magnitude, death){
   data<-as.data.frame(data)
@@ -224,7 +224,7 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @param longitude x-coord
 #' @param latitude y-cood
 #' @param annot_col column to extract popup caption from
-#' @examples eq_map(cleaned_base, "LONGITUDE", "LATITUDE", "popup_text")
+#' @examples \dontrun{eq_map(cleaned_base, "LONGITUDE", "LATITUDE", "popup_text")}
 #' @export
 eq_map<-function(data, longitude, latitude, annot_col){
     keep<-c(longitude, latitude, annot_col)

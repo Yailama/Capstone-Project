@@ -55,5 +55,5 @@ to the paired geom/stat.}
 Geom to draw timeline label
 }
 \examples{
-look at ggplot2 package geom_* usage example to see possibilities of usage
+\dontrun{look at ggplot2 package geom_* usage example to see possibilities of usage}
 }

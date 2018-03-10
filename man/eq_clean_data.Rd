@@ -19,5 +19,5 @@ quite specific to the current database, there is no option to choose columns, re
 thus, the only arument is the name of \code{data.frame} in which base is stored
 }
 \examples{
-eq_clean_data(database)->cleaned_base
+\dontrun{eq_clean_data(database)->cleaned_base}
 }

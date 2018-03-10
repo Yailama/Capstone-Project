@@ -19,5 +19,5 @@ eq_map(data, longitude, latitude, annot_col)
 Function to plot dots of hurricanes on ineractive maps with popus containing basic information
 }
 \examples{
-eq_map(cleaned_base, "LONGITUDE", "LATITUDE", "popup_text")
+\dontrun{eq_map(cleaned_base, "LONGITUDE", "LATITUDE", "popup_text")}
 }

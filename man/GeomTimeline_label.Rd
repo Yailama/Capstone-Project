@@ -13,6 +13,6 @@ It is modification of previous \code{geom_timeline} that can add captions to hur
 or to first n observations, having maximum value of specified metric (for example, first 5 with the highest magnitude level)
 }
 \examples{
-This function is needed to make geom_timeline_label works. Is not called by user directly
+\dontrun{This function is needed to make geom_timeline_label works. Is not called by user directly}
 }
 \keyword{datasets}

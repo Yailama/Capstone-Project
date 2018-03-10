@@ -13,6 +13,6 @@ Here will be the usage of two functions, required to create custom geom: ggplot2
 create new geom_timeline, which shows magnitude and year of hurricane occured
 }
 \examples{
-this function needed to geom_timeline works. Is not called by user directly
+\dontrun{this function needed to geom_timeline works. Is not called by user directly}
 }
 \keyword{datasets}
