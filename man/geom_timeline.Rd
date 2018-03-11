@@ -55,5 +55,6 @@ to the paired geom/stat.}
 Geom to draw timeline
 }
 \examples{
-\dontrun{look at ggplot2 package geom_* usage examples to see possibilities of usage}
+\dontrun{cleaned_base\%>\%filter(YEAR>=2000 & YEAR<=2010 & !is.na(EQ_MAG_ML))\%>\%ggplot()+
+   geom_timeline(aes(fill=DEATHS, colour=DEATHS, x=YEAR, size=EQ_MAG_ML))+theme_timeline}
 }

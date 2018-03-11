@@ -92,7 +92,8 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @title custom geom to plot data
 #' @description Geom to draw timeline
 #' @inheritParams ggplot2::geom_point
-#'@examples \dontrun{look at ggplot2 package geom_* usage examples to see possibilities of usage}
+#'@examples \dontrun{cleaned_base%>%filter(YEAR>=2000 & YEAR<=2010 & !is.na(EQ_MAG_ML))%>%ggplot()+
+#'    geom_timeline(aes(fill=DEATHS, colour=DEATHS, x=YEAR, size=EQ_MAG_ML))+theme_timeline}
 #' @export
     geom_timeline<- function(mapping = NULL, data = NULL, stat = "identity",
                            position = "identity", na.rm = FALSE,
@@ -166,7 +167,9 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @title custom geom with labels
 #' @description Geom to draw timeline label
 #' @inheritParams ggplot2::geom_point
-#' @examples \dontrun{look at ggplot2 package geom_* usage example to see possibilities of usage}
+#' @examples \dontrun{cleaned_base%>%filter(YEAR>=2000 & YEAR<=2004 & !is.na(EQ_MAG_ML))%>%ggplot()+
+#'    geom_timeline_label(aes(fill=DEATHS, colour=DEATHS, x=YEAR, y=COUNTRY, caption=COUNTRY, size=EQ_MAG_ML, n_max=2))+
+#'      theme_timeline}
 #' @export
     geom_timeline_label<- function(mapping = NULL, data = NULL, stat = "identity",
                          position = "identity", na.rm = FALSE,

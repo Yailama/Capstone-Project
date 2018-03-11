@@ -55,5 +55,7 @@ to the paired geom/stat.}
 Geom to draw timeline label
 }
 \examples{
-\dontrun{look at ggplot2 package geom_* usage example to see possibilities of usage}
+\dontrun{cleaned_base\%>\%filter(YEAR>=2000 & YEAR<=2004 & !is.na(EQ_MAG_ML))\%>\%ggplot()+
+   geom_timeline_label(aes(fill=DEATHS, colour=DEATHS, x=YEAR, y=COUNTRY, caption=COUNTRY, size=EQ_MAG_ML, n_max=2))+
+     theme_timeline}
 }
