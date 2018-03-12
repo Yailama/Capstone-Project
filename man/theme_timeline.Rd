@@ -11,4 +11,8 @@ theme_timeline
 \description{
 Here is slight modification of existing classic theme: everything is the same except default position of the legend: it is at the bottom, instead of right side
 }
+\examples{
+\dontrun{cleaned_base\%>\%filter(YEAR>=2000 & YEAR<=2010 & !is.na(EQ_MAG_ML))\%>\%ggplot()+
+                   geom_timeline(aes(fill=DEATHS, colour=DEATHS, x=YEAR, size=EQ_MAG_ML))+theme_timeline}
+}
 \keyword{datasets}

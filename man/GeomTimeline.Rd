@@ -13,6 +13,10 @@ Here will be the usage of two functions, required to create custom geom: ggplot2
 create new geom_timeline, which shows magnitude and year of hurricane occured
 }
 \examples{
-\dontrun{this function needed to geom_timeline works. Is not called by user directly}
+\dontrun{  ggplot2::layer(
+   geom = GeomTimeline, mapping = mapping,
+   data = data, stat = stat, position = position,
+   show.legend = show.legend, inherit.aes = inherit.aes,
+   params = list(na.rm = na.rm, ...))}
 }
 \keyword{datasets}

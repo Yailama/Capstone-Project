@@ -13,7 +13,7 @@
 #' @description  This function is used in order to change name of Location in database to more convinient format: it keeps only Country name in Titlecase
 #' @param location column of dataframe or simply a vector with names of locations to be changed
 #' @return the vector of Country names in title case is returned
-#' @examples \dontrun{eq_location_clean<-(location=database$COUNTRY)}
+#' @examples \dontrun{cleaned_location<-eq_location_clean(location=database$COUNTRY)}
 #' @export
 eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to_title(location), ":")
                                           cleaned_location}
@@ -52,6 +52,13 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @title function to identify legend
 #' @description This is function that is used in ggproto to make custom legend type in new geom_*.
 #'  @inheritParams ggplot2::draw_key_polygon
+#'@examples \dontrun{ggplot2::ggproto("GeomTimeline_label", Geom,
+#'      required_aes = c("x"),
+#'      optional_aes=c("size", "n_max", "caption"),
+#'      non_missing_aes = c("fill", "colour", "y"),
+#'      default_aes = aes(shape = 19, colour = "black", fill = "black", size = 0.1,
+#'                        linetype = 1, alpha = 0.25, fontsize = 1, y=0.5),
+#'      draw_key = draw_key_timline}
 #' @export
     draw_key_timline<-function(data, params, size){
   lwd <- min(data$size, min(size)/4)
@@ -69,8 +76,11 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @description Here will be the usage of two functions, required to create custom geom: ggplot2:ggproto and geom_* (in this case geom_hurricane) in order to
 #' create new geom_timeline, which shows magnitude and year of hurricane occured
 #' @inheritParams ggplot2::ggproto
-#' @examples \dontrun{this function needed to geom_timeline works. Is not called by user directly}
-#' @export
+#' @examples \dontrun{  ggplot2::layer(
+#'    geom = GeomTimeline, mapping = mapping,
+#'    data = data, stat = stat, position = position,
+#'    show.legend = show.legend, inherit.aes = inherit.aes,
+#'    params = list(na.rm = na.rm, ...))}
     GeomTimeline <- ggplot2::ggproto("GeomTimeline", Geom,
                                   required_aes = c("x"),
                                   optional_aes=c("size"),
@@ -121,6 +131,8 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @title modification of existing geom classic theme
 #' @description Here is slight modification of existing classic theme: everything is the same except default position of the legend: it is at the bottom, instead of right side
 #' @inheritParams ggplot2::theme_classic
+#' @examples \dontrun{cleaned_base%>%filter(YEAR>=2000 & YEAR<=2010 & !is.na(EQ_MAG_ML))%>%ggplot()+
+#'                    geom_timeline(aes(fill=DEATHS, colour=DEATHS, x=YEAR, size=EQ_MAG_ML))+theme_timeline}
 #' @export
     theme_timeline<-theme_classic() %+replace% theme(legend.position="bottom")
 
@@ -131,8 +143,11 @@ eq_location_clean <- function(location){cleaned_location<-paste0(stringr::str_to
 #' @description It is modification of previous \code{geom_timeline} that can add captions to hurricanes plotted by date occured. Captions can be applyed to all observation,
 #' or to first n observations, having maximum value of specified metric (for example, first 5 with the highest magnitude level)
 #' @inheritParams ggplot2::ggproto
-#' @examples \dontrun{This function is needed to make geom_timeline_label works. Is not called by user directly}
-#' @export
+#' @examples \dontrun{  ggplot2::layer(
+#'    geom = GeomTimeline, mapping = mapping,
+#'    data = data, stat = stat, position = position,
+#'    show.legend = show.legend, inherit.aes = inherit.aes,
+#'    params = list(na.rm = na.rm, ...))}
     GeomTimeline_label <- ggplot2::ggproto("GeomTimeline_label", Geom,
                                  required_aes = c("x"),
                                  optional_aes=c("size", "n_max", "caption"),

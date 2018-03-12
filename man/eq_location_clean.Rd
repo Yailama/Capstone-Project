@@ -19,5 +19,5 @@ This function is used in order to change name of Location in database to more co
 Source code for the project
 }
 \examples{
-\dontrun{eq_location_clean<-(location=database$COUNTRY)}
+\dontrun{cleaned_location<-eq_location_clean(location=database$COUNTRY)}
 }

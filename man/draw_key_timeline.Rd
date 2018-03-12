@@ -11,3 +11,12 @@ draw_key_timline(data, params, size)
 This is function that is used in ggproto to make custom legend type in new geom_*.
  @inheritParams ggplot2::draw_key_polygon
 }
+\examples{
+\dontrun{ggplot2::ggproto("GeomTimeline_label", Geom,
+     required_aes = c("x"),
+     optional_aes=c("size", "n_max", "caption"),
+     non_missing_aes = c("fill", "colour", "y"),
+     default_aes = aes(shape = 19, colour = "black", fill = "black", size = 0.1,
+                       linetype = 1, alpha = 0.25, fontsize = 1, y=0.5),
+     draw_key = draw_key_timline}
+}

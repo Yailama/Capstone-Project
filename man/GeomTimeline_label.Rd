@@ -13,6 +13,10 @@ It is modification of previous \code{geom_timeline} that can add captions to hur
 or to first n observations, having maximum value of specified metric (for example, first 5 with the highest magnitude level)
 }
 \examples{
-\dontrun{This function is needed to make geom_timeline_label works. Is not called by user directly}
+\dontrun{  ggplot2::layer(
+   geom = GeomTimeline, mapping = mapping,
+   data = data, stat = stat, position = position,
+   show.legend = show.legend, inherit.aes = inherit.aes,
+   params = list(na.rm = na.rm, ...))}
 }
 \keyword{datasets}

@@ -9,12 +9,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 
 This package is designed to work with ([NOAA Significant Earthquake Database](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1)). Note, that database is not included in the package. To get it, follow the link above and download it (tab delimited format)
@@ -25,16 +19,21 @@ Use `eq_clean_data()` function, applyed to raw data.frame to return "cleaned" on
 - `DATE` columns merging together `YEAR`, `MONTH` & `DAY` to Date class
 - `LOCATION_NAME` which is result of cleaning `COUNTRY` column
 
+For example `location<-eq_clen_data(raw_data)`.
+To make Location more readable, `eq_location_clean` function could be used (makes column in Title case): `cleaned_location<-eq_location_clean(location=database$COUNTRY)`
+
+
+
 
 ## Static plots
 
-Use `geom_timeline` to get plot of hurricanes occured. For example, data from 2000 to 2010 could be viewed using the code:
+Use `geom_timeline` to get plot of hurricanes occured, as well as `theme_timeline` to set new suggested theme to your plot. For example, data from 2000 to 2010 could be viewed using the code:
 
 
  `cleaned_base%>%filter(YEAR>=2000 & YEAR<=2010 & !is.na(EQ_MAG_ML))%>%ggplot()+
   geom_timeline(aes(fill=DEATHS, colour=DEATHS, x=YEAR, size=EQ_MAG_ML))+theme_timeline`
   
-which will result in: 
+In this case new `geom_*` with `theme_timeline`  will result in: 
 
 
 ![geom_timeline output](geom_timeline_output1.png)
