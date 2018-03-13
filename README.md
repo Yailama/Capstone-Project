@@ -17,7 +17,7 @@ devtools::install_github("Yailama/Capstone-project")
 
 ## Basic Functions
 
-
+`eq_location_clean` - change location column on raw dataset to title case and adds ":" (i.e. "MEXICO"->"Mexico:")
 `eq_clean_data`- clean raw data and assign rigth format and classes to variables
 
 `geom_timeline/ geom_timeline_label` - custom geoms (see ggplot2 package for more information on geoms) to plot data
